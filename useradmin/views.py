@@ -19,3 +19,10 @@ class useradminclass(View):
         print(query)
         context = {"data": query}
         return render(request= request, template_name=self.template_name, context=context )
+    
+    def post(self, request):
+        form =  staffmodelform(request.POST)
+        context = {"data": form}
+        if form.is_valid():
+            form.save
+        return render(request=request, template_name=self.template_name, context=context)

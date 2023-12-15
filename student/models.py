@@ -4,11 +4,11 @@ from useradmin.models import gender_choices
 
 # Create your models here.
 
-class_choices = {
-    1:1,
-    2:2,
-    3:3
-}
+class_choices = [
+    (1,1),
+    (2,2),
+    (3,3)
+]
 
 class studentmodel(models.Model):
     im = models.ImageField( upload_to=None, height_field=None, width_field=None, max_length=None)

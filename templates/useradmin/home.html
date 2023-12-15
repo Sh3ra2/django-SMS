@@ -6,26 +6,31 @@
     <h2>Staff</h2>
     <br>
     <div class="card" id="main_card">
-        <div class="card-body">
-
-            <div class="row">
-                <div class="col ms-auto">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Filter</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+        <div class="card-body" style = "overflow-y:auto;">
+            <div class="row justify-content-between">
+                <div class="col-2">
+                    <a href=""><button type="button" class="btn btn-success">Add</button></a>
                 </div>
-                <div class="col">
-                    <div class="mb-3">
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                <div class = "col-10">
+                    <div class="row justify-content-end" style="width: 100%;">
+                        <div class="col-2" style = "width:130px;">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Filter</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="col-2" style = "width:130px;">
+                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="abc">
+                        </div>
+                        <div class="col-1">
+                            <a href=""><button type="button" class="btn btn-primary">Search</button></a>
+                        </div>
                     </div>
                 </div>
-                <div class="col me-auto">
-                    <a href=""><button type="button" class="btn btn-primary">Search</button></a>
-                </div>
             </div>
+            <br><br>
             <table class="table">
                 <thead>
                     <tr>
