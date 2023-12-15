@@ -1,0 +1,41 @@
+{
+    "folder-color.pathColors": [
+        {
+            "folderPath": "CbvSms\\useradmin\\",
+            "color": "foldercolorizer.SteelBlue"
+        },
+        {
+            "folderPath": "CbvSms\\student\\",
+            "color": "foldercolorizer.SteelBlue"
+        },
+        {
+            "folderPath": "CbvSms\\staff\\",
+            "color": "foldercolorizer.SteelBlue"
+        },
+        {
+            "folderPath": "CbvSms\\templates\\",
+            "color": "foldercolorizer.Copper"
+        },
+        {
+            "folderPath": "CbvSms\\",
+            "color": "foldercolorizer.LimeGreen"
+        },
+        {
+            "folderPath": "CbvSms\\.vscode\\"
+        },
+        {
+            "folderPath": "CbvSms\\myenv\\"
+        },
+        {
+            "folderPath": "CbvSms\\manage.py\\"
+        },
+        {
+            "folderPath": "CbvSms\\static\\",
+            "color": "foldercolorizer.PureGold"
+        },
+        {
+            "folderPath": "CbvSms\\mchoices.py\\",
+            "color": "foldercolorizer.LightSalmon"
+        }
+    ]
+}

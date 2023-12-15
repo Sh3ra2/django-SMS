@@ -1,0 +1,67 @@
+{% extends "useradmin/base.html" %}
+
+
+{% block body %}
+    <br>
+    <h2>Staff</h2>
+    <br>
+    <div class="card" id="main_card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col ms-auto">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Filter</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    </div>
+                </div>
+                <div class="col me-auto">
+                    <a href=""><button type="button" class="btn btn-primary">Search</button></a>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Father Name</th>
+                        <th scope="col">Qualification</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Added by</th>
+                        <th scope="col">Joining date</th>
+                        <th scope="col">Till</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for obj in data %}
+                    <tr>
+                        <th>{{obj.id}}</th>
+                        <td>-</td>
+                        <td>{{obj.name}}</td>
+                        <td>{{obj.father_name}}</td>
+                        <td>{{obj.qualification}}</td>
+                        <td>{{obj.address}}</td>
+                        <td>{{obj.added_by}}</td>
+                        <td>{{obj.join_date}}</td>
+                        <td>
+                            {% if obj.till is None %}
+                                Working
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}
