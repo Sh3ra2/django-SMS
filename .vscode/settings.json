@@ -36,6 +36,10 @@
         {
             "folderPath": "CbvSms\\mchoices.py\\",
             "color": "foldercolorizer.LightSalmon"
+        },
+        {
+            "folderPath": "CbvSms\\media\\",
+            "color": "foldercolorizer.PureGold"
         }
     ]
 }
