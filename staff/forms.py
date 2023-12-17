@@ -1,8 +1,6 @@
 from django import forms
 from django.forms import ModelForm, SelectDateWidget
 from .models import staffmodel
-from django.contrib.admin.widgets import AdminDateWidget  
-
 
 class staffmodelform(forms.ModelForm):
     join_date = forms.DateField(
