@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
-
 {% block body %}
     <br>
-    <h2>Staff</h2>
+    <h4>
+        {% block pagehead %}
+            STAFF
+        {% endblock%}
+    </h4>
     <br>
     <div class="card" id="main_card">
         <div class="card-body" style = "overflow-y:auto;">
@@ -16,19 +19,24 @@
                 <div class = "col-10">
                     <div class="row justify-content-end" style="width: 100%;">
                         <div class="col-2" style = "width:130px;">
-                            <select class="form-select" aria-label="Default select example" id="typefilter">
-                                <option value="1">Name</option>
-                                <option value="2">Father name</option>
-                                <option value="3">Qualification</option>
-                                <option value="4">Address</option>
-                                <option value="5">Added by</option>
-                            </select>
+                            {% block filterbutton%}
+                                <select class="form-select" aria-label="Default select example" id="typefilter">
+                                    <option value="1">Name</option>
+                                    <option value="2">Father name</option>
+                                    <option value="3">Qualification</option>
+                                    <option value="4">Address</option>
+                                    <option value="5">Added by</option>
+                                </select>
+                            {% endblock %}
                         </div>
                         <div class="col-2" style = "width:130px;">
-                            <input type="text" class="form-control" id="tofilter" placeholder="abc">
+                            {% block searchfield %}
+                                <input type="text" class="form-control" id="tofilter" placeholder="abc">
+                            {% endblock%}
                         </div>
                         <div class="col-1">
                             <button type="button" class="btn btn-primary" onclick="stafffilter()">Search</button>
+                        
                         </div>
                         <script>
                             function stafffilter()
@@ -46,6 +54,7 @@
                 </div>
             </div>
             <br><br>
+            {% block data-table %}
             <table class="table">
                 <thead>
                     <tr>
@@ -56,11 +65,7 @@
                         <th scope="col">Qualification</th>
                         <th scope="col">Address</th>
                         <th scope="col">Added by</th>
-                        <th scope="col">
-                            Joining date
-                            <span class="material-symbols-outlined" style="cursor:pointer;" id="date_order_button" onclick = "orderdates()">
-                                expand_circle_down
-                            </span>
+                        <th scope="col">Joining date</th>
                             <script>
                                 function oderdates()
                                 {
@@ -110,6 +115,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+            {% endblock %}
         </div>
     </div>
 

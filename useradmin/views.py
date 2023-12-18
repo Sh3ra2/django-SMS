@@ -67,4 +67,11 @@ class staffformview(View):
         
         return render(request=request, template_name=self.template_name, context=context)
     
-    
+
+class useradmindashboardclass(View):
+    template_name = "useradmin/dashboard.html"
+
+    def get(self, request):
+        query = staffmodel.objects.all()
+        context = {"data": query}
+        return render(request = request, template_name=self.template_name, context = context)

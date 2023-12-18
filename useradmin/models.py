@@ -16,7 +16,7 @@ role_choices = [
 ]
 
 class useradminmodel(models.Model):
-    im = models.ImageField(upload_to=None)
+    im = models.ImageField(upload_to="useradmin")
     name = models.CharField(max_length=50)
     father_name = models.CharField(max_length=50)
     gender = models.CharField(choices = gender_choices, max_length=50)

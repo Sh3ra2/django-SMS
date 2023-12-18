@@ -6,7 +6,7 @@ from useradmin.models import gender_choices
 
 
 class staffmodel(models.Model):
-    im = models.ImageField(upload_to="staff", height_field=None, width_field=None, max_length=None)
+    im = models.ImageField(upload_to="staff")
     name = models.CharField(max_length=50)
     father_name = models.CharField(max_length=50)
     gender = models.CharField(choices = gender_choices, max_length=50)
@@ -15,3 +15,6 @@ class staffmodel(models.Model):
     address = models.CharField(max_length=50)
     join_date = models.DateField(auto_now=False, auto_now_add=False)
     till = models.DateField(auto_now=False, auto_now_add=False, null = True, blank = True)
+
+    def __str__(self) -> str:
+        return f"{self.name}, {self.qualification}"

@@ -1,6 +1,99 @@
 {% extends "useradmin/home.html" %}
 
+{% block pagehead %}
+    STUDENTS
+{% endblock %}
 
-{% block addbutton %}
-    <a href="addstudent/ADD/"><button type="button" class="btn btn-success">Add</button></a>
+
+
+{% block card-content%}
+    {% block addbutton %}
+        <a href="addstudent/ADD/"><button type="button" class="btn btn-success">Add Student</button></a>
+    {% endblock %}
+
+    {% block filterbutton%}
+        <select class="form-select" aria-label="Default select example" id="typefilter">
+            <option value="1">Name</option>
+            <option value="2">Father name</option>
+            <option value="3">Qualification</option>
+            <option value="4">Address</option>
+            <option value="5">Added by</option>
+        </select>
+    {% endblock %}
+
+    {% block searchfield %}
+        <input type="text" class="form-control" id="tofilter" placeholder="abc">
+    {% endblock%}
+    
+    {% block data-table %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Father Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Class</th>
+                <th scope="col">Age</th>
+                <th scope="col">Admitted by</th>
+                <th scope="col">Date</th>
+                
+                <th scope="col">OP</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in data %}
+            <tr>
+                <th>{{obj.id}}</th> 
+                <td>{{obj.name}}</td>
+                <td>{{obj.father_name}}</td>
+                <td>{{obj.gender}}</td>
+                <td>{{obj.sclass}}</td>
+                <td>{{obj.age}}</td>
+                <td>{{obj.admitted_by}}</td>
+                <td>{{obj.date_time}}</td>
+                
+                <td>
+                    <a href="updatestudent/UPDATE/{{obj.id}}/">
+                        <button type="button" class="btn btn-primary btn-sm">
+                            <span class="material-symbols-outlined">
+                                update
+                            </span>
+                        </button>
+                    </a>
+                    <a href="deletestudent/DELETE/{{obj.id}}/">
+                        <button type="button" class="btn btn-danger btn-sm">
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class = "pagination">
+        <span class="step-links">
+            {% if data.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page = {{data.previous_page_number}}">previous</a>
+            {% endif %}
+
+            <span class = "current">
+                page {{data.number}} of {{data.paginator.num_pages}}.
+            </span>
+
+            {% if data.has_next %}
+                <a href="?page={{data.next_page_number}}">next</a>
+                <a href="?page = {{data.paginator.num_pages}}">last &raquo;</a>
+            {% endif %}
+
+        </span>
+        
+    </div>
+
+    {% endblock %}
+
 {% endblock %}

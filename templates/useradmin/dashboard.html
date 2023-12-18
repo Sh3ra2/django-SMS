@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load useradmin_extras %}
+
+{% block body %}
+
+<h4>Students Count by Admitted Date</h4>
+<ul>
+    {% staff_count_by_joindate as counts %}
+    {% for entry in counts %}
+        <li>{{entry}}</li>
+        <li>{{ entry.join_date }}: {{ entry.count }}</li>
+    {% endfor %}
+</ul>
+<ul>
+    {% staff_gender_count as gender_counts%}
+    {% for rec in gender_counts%}
+        <li>{{rec.gender}} - {{rec.count}}</li>
+    {% endfor %}
+</ul>
+
+<h4>Student stats</h4>
+<ul>
+    {% studentstats as sgender_counts%}
+    {% for rec in sgender_counts.0 %}
+        <li>{{rec}}</li>
+    {% endfor %}
+</ul>
+
+<ul>
+    {% studentstats as sgender_counts%}
+    {% for rec in sgender_counts.1 %}
+        <li>{{rec}}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
