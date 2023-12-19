@@ -9,6 +9,11 @@ class_choices = [
     ("2","2"),
     ("3","3")
 ]
+S_Choices = [
+    ("Maths", "Maths"),
+    ("English", "English"),
+    ("English", "Urdu")
+]
 
 class studentmodel(models.Model):
     im = models.ImageField( upload_to="student")
@@ -16,7 +21,7 @@ class studentmodel(models.Model):
     father_name = models.CharField(max_length=50)
     gender = models.CharField(choices = gender_choices,max_length=50)
     sclass = models.CharField(choices = class_choices, max_length=50)
-    age = models.IntegerField()
+    DOB = models.DateField(auto_now=False, auto_now_add=False, default = "2023-9-12")
     admitted_by = models.ForeignKey(staffmodel, on_delete=models.CASCADE)
     date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
 
@@ -28,16 +33,17 @@ class studentmodel(models.Model):
 
 class examsmodel(models.Model):
     session_name = models.CharField(max_length=80)
-    subject_name = models.CharField(max_length=80)
+    esubject = models.CharField(choices = S_Choices, max_length=50, default = "English")
     invigilator = models.ManyToManyField(staffmodel)
-    taken_by = models.ManyToManyField(studentmodel)
-
+    studentforexam = models.ManyToManyField(studentmodel)
+ 
     def __str__(self) -> str:
-        return f"{self.session_name}, {self.subject_name}"
+        return f"{self.session_name}, {self.esubject}"
 
 
-class examresultmodel(models.Model):
+class subjectpapermodel(models.Model):
     exam = models.ForeignKey(examsmodel, on_delete=models.CASCADE)
-    student = models.ForeignKey(studentmodel, on_delete=models.CASCADE)
+    esubject = models.CharField(choices = S_Choices, max_length=50)
+    pstudent = models.ForeignKey(studentmodel, on_delete=models.CASCADE)
     total_marks = models.IntegerField()
     obtained_marks = models.IntegerField()
