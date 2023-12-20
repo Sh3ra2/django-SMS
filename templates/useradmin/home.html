@@ -13,7 +13,7 @@
             <div class="row justify-content-between">
                 <div class="col-2">
                     {% block addbutton %}
-                        <a href="{% url 'useradmin-getstaff' %}"><button type="button" class="btn btn-success">Add</button></a>
+                        <a href="{% url 'useradmin-getstaff' %}"><button type="button" class="btn btn-success">Add Staff</button></a>
                     {% endblock %}
                 </div>
                 <div class = "col-10">
@@ -35,8 +35,9 @@
                             {% endblock%}
                         </div>
                         <div class="col-1">
-                            <button type="button" class="btn btn-primary" onclick="stafffilter()">Search</button>
-                        
+                            {% block searchbutton %}
+                                <button type="button" class="btn btn-primary" onclick="stafffilter()">Search</button>
+                            {% endblock%}
                         </div>
                         <script>
                             function stafffilter()

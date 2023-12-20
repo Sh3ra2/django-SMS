@@ -1,22 +1,35 @@
 from django.apps import AppConfig
 from django.core.signals import setting_changed
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, m2m_changed
 from .models import examsmodel, subjectpapermodel
 
-@receiver(post_save, sender = examsmodel)
-def create_subjectmodel_fromexam(sender, instance, created, **kwargs):
-    print("creating form for students")
-    print("overall data is ", kwargs)
-    print("Instance actually is , ", instance)
-    print("data is ", instance.studentforexam.all())
+@receiver(m2m_changed, sender =  examsmodel.studentforexam.through)
+def handle_studenforexam_change(sender, instance, action, **kwargs):
+    print("checking the students selected for exam, track db relation")
+    if action == "post_add":
+        create_subjectmodel_fromexam(instance)
 
-    for student in instance.studentforexam.all():
+
+@receiver(post_save, sender = examsmodel)
+def handle_save(sender, instance, created, **kwargs):
+    print("saving instance")
+    if created:
+        create_subjectmodel_fromexam(instance)
+
+
+def create_subjectmodel_fromexam(examinstance):
+    print("creating form for students")
+    print("overall data is ", examinstance)
+    
+    print("data is ", examinstance.studentforexam.all())
+
+    for student in examinstance.studentforexam.all():
         print("from for loop")
 
         subject_paper_instance = subjectpapermodel(
-            exam= instance,
-            esubject= instance.esubject,
+            exam= examinstance,
+            esubject= examinstance.esubject,
             pstudent=student,
             total_marks=0,  # Set an initial value
             obtained_marks=0  # Set an initial value

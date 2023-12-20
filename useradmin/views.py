@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.views import View
 from staff.models import staffmodel
 from staff.forms import staffmodelform
+from student.forms import examsmodelform
+from student.models import examsmodel
 
 # Create your views here.
 
@@ -75,3 +77,56 @@ class useradmindashboardclass(View):
         query = staffmodel.objects.all()
         context = {"data": query}
         return render(request = request, template_name=self.template_name, context = context)
+    
+
+class examclass(View):
+    template_name = "useradmin/examview.html"
+
+    def get(self, request, pk = None):
+        print("examclass got ", pk)
+        if pk:
+            examsmodel.objects.filter(pk = pk).delete()
+            return redirect("exam-view")
+        query  = examsmodel.objects.all()
+        print("query is ", query)
+        context = {"data": query}
+        print("context is ", context)
+        ease = context["data"]
+        print("data is here")
+        for obj in ease:
+            print(obj)
+            print(obj.esubject)
+            print("manytomany students are", obj.studentforexam)
+
+        return render(request=request, template_name=self.template_name, context = context)
+
+
+class examnewsetclass(View):
+    template_name = "useradmin/form.html"
+
+    def get(self, request, pk = None):
+
+        if pk:
+            ins = get_object_or_404(examsmodel, pk = pk)
+            form  = examsmodelform(instance=ins)
+        else:
+            form  = examsmodelform()
+        
+        context  = {"form": form}
+        return render(request=request, template_name=self.template_name, context = context)
+    
+    def post(self, request, pk = None ):
+        
+        if pk:
+            ins = get_object_or_404(examsmodel, pk= pk)
+            form =  examsmodelform(request.POST, instance= ins)
+        else:
+            form =  examsmodelform(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect("exam-view")
+        
+        context = {"form": form}
+
+        return render(request= request, template_name=self.template_name, context = context)

@@ -6,26 +6,26 @@
 
 
 
-{% block card-content%}
-    {% block addbutton %}
-        <a href="addstudent/ADD/"><button type="button" class="btn btn-success">Add Student</button></a>
-    {% endblock %}
 
-    {% block filterbutton%}
-        <select class="form-select" aria-label="Default select example" id="typefilter">
-            <option value="1">Name</option>
-            <option value="2">Father name</option>
-            <option value="3">Qualification</option>
-            <option value="4">Address</option>
-            <option value="5">Added by</option>
-        </select>
-    {% endblock %}
+{% block addbutton %}
+    <a href="addstudent/ADD/"><button type="button" class="btn btn-success">Add Student</button></a>
+{% endblock %}
 
-    {% block searchfield %}
-        <input type="text" class="form-control" id="tofilter" placeholder="abc">
-    {% endblock%}
-    
-    {% block data-table %}
+{% block filterbutton%}
+    <select class="form-select" aria-label="Default select example" id="typefilter">
+        <option value="1">Name</option>
+        <option value="2">Father name</option>
+        <option value="3">Qualification</option>
+        <option value="4">Address</option>
+        <option value="5">Added by</option>
+    </select>
+{% endblock %}
+
+{% block searchfield %}
+    <input type="text" class="form-control" id="tofilter" placeholder="abc">
+{% endblock%}
+
+{% block data-table %}
     <table class="table">
         <thead>
             <tr>
@@ -93,7 +93,5 @@
         </span>
         
     </div>
-
-    {% endblock %}
 
 {% endblock %}

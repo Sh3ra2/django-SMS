@@ -1,0 +1,77 @@
+{% extends "useradmin/home.html" %}
+
+{% block pagehead %}
+    EXAMS
+{% endblock %}
+
+
+
+{% block card-content%}
+    {% block addbutton %}
+        <a href="newexam"><button type="button" class="btn btn-success">New Exam Session</button></a>
+    {% endblock %}
+
+    {% block filterbutton%}
+        <select class="form-select" aria-label="Default select example" id="typefilter">
+            <option value="1">Session</option>
+            <option value="2">Subject</option>
+            <option value="3">Teacher</option>
+            <option value="4">Class</option>
+        </select>
+    {% endblock %}
+
+    {% block searchfield %}
+        <input type="text" class="form-control" id="tofilter" placeholder="abc">
+    {% endblock%}
+    
+    {% block data-table %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Session</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Teacher</th>
+                <th scope="col">Class</th>
+                <th scope="col">Students</th>
+                <th scope="col">OP</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in data %}
+            <tr>
+                <th>{{obj.id}}</th> 
+                <td>{{obj.session_name}}</td>
+                <td>{{obj.esubject}}</td>
+                <td>{{obj.invigilator}}</td>
+                <td>{{obj.selected_class}}</td>
+                <td>
+                    {% for student in obj.studentforexam.all %}
+                        {{ student }}
+                        {% comment %} {% if not forloop.last %}, {% endif %} {% endcomment %}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="updateexam/{{obj.id}}/">
+                        <button type="button" class="btn btn-primary btn-sm">
+                            <span class="material-symbols-outlined">
+                                update
+                            </span>
+                        </button>
+                    </a>
+                    <a href="deleteexam/{{obj.id}}/">
+                        <button type="button" class="btn btn-danger btn-sm">
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}
+
+{% endblock %}

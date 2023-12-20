@@ -34,9 +34,10 @@ class studentmodel(models.Model):
 class examsmodel(models.Model):
     session_name = models.CharField(max_length=80)
     esubject = models.CharField(choices = S_Choices, max_length=50, default = "English")
-    invigilator = models.ManyToManyField(staffmodel)
-    studentforexam = models.ManyToManyField(studentmodel)
- 
+    invigilator = models.ForeignKey(staffmodel, on_delete=models.CASCADE, default = 1)
+    selected_class = models.CharField(choices = class_choices, max_length=50, default = "2")
+    studentforexam = models.ManyToManyField(studentmodel, blank = True)
+
     def __str__(self) -> str:
         return f"{self.session_name}, {self.esubject}"
 
