@@ -26,7 +26,20 @@
 {% block data-table %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form.as_p}}
+        {{form.username}}
+        {{form.password}}
+        {{form.date_joined}}
+        <br>
+        {{form.name}}
+        {{form.user_type}}
+        {{form.father_name}}
+        {{form.gender}}
+        {{form.address}}
+        {{form.im}}
+        {{form.sclass}}
+        {{form.DOB}}
+        {{form.admitted_by}}
+        {{form.date_time}}
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 {% endblock %}

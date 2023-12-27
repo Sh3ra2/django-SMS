@@ -4,7 +4,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save, m2m_changed
 from .models import examsmodel, subjectpapermodel
 
-@receiver(m2m_changed, sender =  examsmodel.studentforexam.through)
+# @receiver(m2m_changed, sender =  examsmodel.studentforexam.through)
 def handle_studenforexam_change(sender, instance, action, **kwargs):
     print("checking the students selected for exam, track db relation")
     if action == "post_add":

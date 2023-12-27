@@ -10,14 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='staffmodel',
-            name='email',
-            field=models.EmailField(max_length=254),
-        ),
-        migrations.AlterField(
-            model_name='staffmodel',
-            name='password',
-            field=models.CharField(max_length=254),
-        ),
+        
     ]

@@ -10,8 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterModelOptions(
-            name='staffmodel',
-            options={'default_related_name': 'staff_user'},
-        ),
+        
     ]

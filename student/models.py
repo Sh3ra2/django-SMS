@@ -1,8 +1,8 @@
 from django.db import models
 from staff.models import staffmodel
 from django.contrib.auth.models import User
-from useradmin.models import gender_choices
-
+from useradmin.models import gender_choices, CustomUser
+from django.utils.translation import gettext_lazy as _
 # Create your models here.
 
 class_choices = [
@@ -16,20 +16,19 @@ S_Choices = [
     ("English", "Urdu")
 ]
 
-class studentmodel(models.Model):
+class studentmodel(CustomUser):
     im = models.ImageField( upload_to="student")
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default = 1)
-    user_type = models.CharField(default  = "student", max_length = 20)
-    name = models.CharField(max_length=50)
-    father_name = models.CharField(max_length=50)
-    gender = models.CharField(choices = gender_choices,max_length=50)
     sclass = models.CharField(choices = class_choices, max_length=50)
     DOB = models.DateField(auto_now=False, auto_now_add=False, default = "2023-9-12")
-    admitted_by = models.ForeignKey(staffmodel, on_delete=models.CASCADE)
+    admitted_by = models.ForeignKey(staffmodel, on_delete=models.SET_NULL, null = True)
     date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def __str__(self) -> str:
         return f"{self.name}, {self.father_name}"
+    
+    class Meta:
+        verbose_name = _("Student")
+        verbose_name_plural = _("Students")
 
 
     

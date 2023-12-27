@@ -4,9 +4,35 @@ from django.views import View
 from staff.models import staffmodel
 from staff.forms import staffmodelform
 from student.forms import examsmodelform
+from . import models
 from student.models import examsmodel
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
 
 # Create your views here.
+
+class login_request(View):
+    template_name = 'useradmin/login.html'
+
+    def get(self, request):
+        form =  AuthenticationForm
+        context = { 'form' : form}
+        return render(request=request, template_name=self.template_name, context = context)
+
+    def post(self, request):
+        form =  AuthenticationForm(request, data =  request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                rt = models.CustomUser.objects.filter('username__iexact'== username)
+                if rt == 'User Admin':
+                    return redirect('useradmin-getstaff')
+                login(request, user)
+                return redirect('useradmin-getstaff')
+        context = {'form':form}
+        return render(request = request, template_name = self.template_name, context = context)
 
 def index(request):
     return render(request=request, template_name="useradmin/home.html")
@@ -35,7 +61,7 @@ class useradminclass(View):
         else:
             query = staffmodel.objects.all()
         
-        print(query)
+        # print(query)
         context = {"data": query}
         return render(request= request, template_name=self.template_name, context=context )
     

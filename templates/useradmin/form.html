@@ -27,7 +27,19 @@
     <div class= "container">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{form.as_p}}
+                {{form.username}}
+                {{form.password}}
+                {{form.date_joined}}
+                {{form.name}}
+                {{form.user_type}}
+                {{form.father_name}}
+                {{form.gender}}
+                {{form.address}}
+                {{form.im}}
+                {{form.qualification}}
+                {{form.added_by}}
+                {{form.join_date}}
+                {{form.till}}
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
