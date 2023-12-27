@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm, SelectDateWidget
 from .models import staffmodel
 
+
 class staffmodelform(forms.ModelForm):
     join_date = forms.DateField(
         label="join_date",

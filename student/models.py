@@ -1,5 +1,6 @@
 from django.db import models
 from staff.models import staffmodel
+from django.contrib.auth.models import User
 from useradmin.models import gender_choices
 
 # Create your models here.
@@ -17,6 +18,8 @@ S_Choices = [
 
 class studentmodel(models.Model):
     im = models.ImageField( upload_to="student")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default = 1)
+    user_type = models.CharField(default  = "student", max_length = 20)
     name = models.CharField(max_length=50)
     father_name = models.CharField(max_length=50)
     gender = models.CharField(choices = gender_choices,max_length=50)

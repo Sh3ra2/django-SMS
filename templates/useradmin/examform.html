@@ -1,0 +1,70 @@
+{% extends "useradmin/home.html" %}
+
+{% block pagehead %}
+    ADD STAFF
+{% endblock %}
+
+
+
+
+{% block addbutton %}
+    <a href="{% url 'useradmin-home' %}"><button type="button" class="btn btn-success">Back</button></a>
+{% endblock %}
+
+{% block filterbutton%}
+    
+    
+{% endblock %}
+
+{% block searchfield %}
+    
+{% endblock%}
+
+{% block searchbutton %}
+{% endblock %}
+
+{% block data-table %}
+    <div class= "container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="hero">
+                    
+                <!-- Name -->
+                <div class="input-group mb-5">
+                    <div class="form-group"
+                    style="background:aqua; place-self:center;padding:10px;color:black;font-weight:600;border-radius:7px 0px 7px 0px;">
+                        <label style="width:100px;text-align:center;">Session Name :</label>
+                    </div>
+                    {{form.session_name}}
+                </div>
+
+                <div class="input-group mb-5">
+                    <div class="form-group"
+                    style="background:aqua; place-self:center;padding:10px;color:black;font-weight:600;border-radius:7px 0px 7px 0px;">
+                        <label style="width:100px;text-align:center;">Subject :</label>
+                    </div>
+                    {{form.esubject}}
+                </div>
+
+                <div class="input-group mb-5">
+                    <div class="form-group"
+                    style="background:aqua; place-self:center;padding:10px;color:black;font-weight:600;border-radius:7px 0px 7px 0px;">
+                        <label style="width:100px;text-align:center;">Teacher :</label>
+                    </div>
+                    {{form.invigilator}}
+                </div>
+
+                <div class="input-group mb-5">
+                    <div class="form-group"
+                    style="background:aqua; place-self:center;padding:10px;color:black;font-weight:600;border-radius:7px 0px 7px 0px;">
+                        <label style="width:100px;text-align:center;">Class :</label>
+                    </div>
+                    {{form.selected_class}}
+                </div>
+            {{form.studentforexam.as_hidden}}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
+

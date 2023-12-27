@@ -87,6 +87,7 @@ class examclass(View):
         if pk:
             examsmodel.objects.filter(pk = pk).delete()
             return redirect("exam-view")
+        
         query  = examsmodel.objects.all()
         print("query is ", query)
         context = {"data": query}
@@ -102,7 +103,7 @@ class examclass(View):
 
 
 class examnewsetclass(View):
-    template_name = "useradmin/form.html"
+    template_name = "useradmin/examform.html"
 
     def get(self, request, pk = None):
 
@@ -124,9 +125,10 @@ class examnewsetclass(View):
             form =  examsmodelform(request.POST)
         
         if form.is_valid():
+            
             form.save()
             return redirect("exam-view")
-        
+
         context = {"form": form}
 
         return render(request= request, template_name=self.template_name, context = context)

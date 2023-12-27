@@ -1,0 +1,32 @@
+{% extends "useradmin/home.html" %}
+
+{% block pagehead %}
+    ADD STUDENT
+{% endblock %}
+
+
+
+
+{% block addbutton %}
+    <a href="{% url 'staff-home' %}"><button type="button" class="btn btn-success">Back</button></a>
+{% endblock %}
+
+{% block filterbutton%}
+    
+    
+{% endblock %}
+
+{% block searchfield %}
+    
+{% endblock%}
+
+{% block searchbutton %}
+{% endblock %}
+
+{% block data-table %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
