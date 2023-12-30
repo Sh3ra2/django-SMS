@@ -32,23 +32,17 @@
 <div>
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'useradmin-home' %}"><h2>SMS</h2></a>
+      <a class="navbar-brand" {% block titlelink %} href="{% url 'useradmin-home' %}" {% endblock %} ><h2>SMS</h2></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% block navs %}
+          
+          {% endblock %}
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'useradmin-dashboard' %}">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'staff-home' %}"><h5>Staff</h5></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'student-home' %}"><h5>Student</h5></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'exam-view' %}">Exam</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}" style = "border:solid grey;">Logout</a>
           </li>
       </div>
     </div>

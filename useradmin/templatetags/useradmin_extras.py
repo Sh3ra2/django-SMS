@@ -24,3 +24,12 @@ def studentstats():
     class_c = studentmodel.objects.values("sclass").annotate(count = Count("id"))
     admition_time = studentmodel.objects.values("date_time__date").annotate(count = Count("id"))
     return gender_c
+
+
+@register.filter
+def filtertagcheck(value):
+    return value.upper()
+
+@register.filter
+def addtwo(v1,v2):
+    return v1+v2

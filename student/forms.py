@@ -1,15 +1,9 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, inlineformset_factory
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import studentmodel, subjectpapermodel, examsmodel
-
-
-class studentuserform(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ['username', "password1", "password2"]
-
+from staff.models import staffmodel
 
 
 class studentmodelform(forms.ModelForm):
@@ -20,10 +14,20 @@ class studentmodelform(forms.ModelForm):
         widget= forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
         input_formats=["%Y-%m-%d"]
     )
+    password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = studentmodel
         fields = "__all__"
+
+    def save(self, commit = True):
+        user = super().save(commit =False)
+        password = self.cleaned_data["password"]
+        user.set_password(password)
+        user.is_active = True
+        if commit:
+            user.save()
+        return user
 
 
 class examsmodelform(forms.ModelForm):
@@ -49,6 +53,8 @@ class examsmodelform(forms.ModelForm):
             instance.save()
 
         return instance
+
+studentformset = inlineformset_factory(staffmodel, examsmodel, fields=['selected_class', 'invigilator', 'esubject'])
 
 
 class subjectpapermodelform(forms.ModelForm):

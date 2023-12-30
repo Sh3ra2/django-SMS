@@ -1,16 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from django.views import View
 from staff.models import staffmodel
 from staff.forms import staffmodelform
 from student.forms import examsmodelform
-from . import models
+from . import models, forms
 from student.models import examsmodel
+from student.forms import studentformset
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
+from django.dispatch import Signal
+
+my_signal = Signal()
 
 # Create your views here.
 
+
+# ========================== LOGINS HERE ==========================
 class login_request(View):
     template_name = 'useradmin/login.html'
 
@@ -21,22 +26,59 @@ class login_request(View):
 
     def post(self, request):
         form =  AuthenticationForm(request, data =  request.POST)
+        print('data is ', request.POST)
+        print('user is here')
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
+            print('Checking user')
             user = authenticate(username=username, password=password)
+            print("user is ", user)
             if user is not None:
-                rt = models.CustomUser.objects.filter('username__iexact'== username)
-                if rt == 'User Admin':
-                    return redirect('useradmin-getstaff')
+                
+                rt = get_object_or_404(models.CustomUser, username = username)
                 login(request, user)
-                return redirect('useradmin-getstaff')
+                
+                print(rt.user_type)
+                if rt.user_type == 'User Admin':
+                    return redirect('useradmin-home')
+                elif rt.user_type == 'Staff':
+                    print('staff recognised')
+                    return redirect('staff-home')
+                elif rt.user_type == 'Student':
+                    return redirect('student-home')
+        else:
+            print(form.errors)
+
         context = {'form':form}
         return render(request = request, template_name = self.template_name, context = context)
+# ========================== LOGINS HERE ==========================
 
-def index(request):
-    return render(request=request, template_name="useradmin/home.html")
+# ========================== REGISTER HERE ==========================
+class useradminregisterclass(View):
+    template_name = 'useradmin/register.html'
 
+    def get(self, request):
+        form  = forms.UserAdminModelForm()
+        context = {'form': form}
+        return render(request= request, template_name=self.template_name, context = context)
+
+    def post(self, request):
+        form  = forms.UserAdminModelForm(request.POST, request.FILES)
+        print("data is ", request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+        context = {'form':form}
+        return render(request= request, template_name=self.template_name, context = context)
+# ========================== REGISTER HERE ==========================
+
+# ========================== LOGOUT HERE ==========================
+def logout_request(request):
+    logout(request)
+    return redirect('login')
+# ========================== LOGOUT HERE ==========================
 
 class useradminclass(View):
     template_name  = "useradmin/home.html"
@@ -58,9 +100,10 @@ class useradminclass(View):
                 query = staffmodel.objects.filter(added_by__icontains = tosearch)
         elif pk:
             staffmodel.objects.filter(pk = pk).delete()
+            return redirect('useradmin-home')
         else:
             query = staffmodel.objects.all()
-        
+            my_signal.send(self, arg1 = "hello")
         # print(query)
         context = {"data": query}
         return render(request= request, template_name=self.template_name, context=context )
@@ -138,8 +181,9 @@ class examnewsetclass(View):
             form  = examsmodelform(instance=ins)
         else:
             form  = examsmodelform()
+            st_form = studentformset()
         
-        context  = {"form": form}
+        context  = {"form": form, 'st_form': st_form}
         return render(request=request, template_name=self.template_name, context = context)
     
     def post(self, request, pk = None ):

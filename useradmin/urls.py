@@ -17,6 +17,4 @@ urlpatterns = [
     path('newexam', views.examnewsetclass.as_view(), name="exam-new"),
     path('deleteexam/<int:pk>/', views.examclass.as_view(), name="exam-delete"),
     path('updateexam/<int:pk>/', views.examnewsetclass.as_view(), name="exam-update"),
-
-    path('login/', views.login_request.as_view(), name = 'login')
 ]

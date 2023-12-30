@@ -3,7 +3,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views import View
 from django.contrib.auth.models import User
 from student.models import studentmodel
-from student.forms import studentmodelform, studentuserform
+from student.forms import studentmodelform, studentformset
 
 # --VIEW-- 
 #       --USING MULTI-TEMPLATE--
@@ -23,7 +23,7 @@ class studentuserclass(View):
         user_form = studentmodelform(request.POST, request.FILES)
         if user_form.is_valid():
             user_form.save()
-            return redirect('addstudent/ADD/')
+            return redirect('staff-home')
         else:
             print(user_form.errors)
         
@@ -42,8 +42,6 @@ class staffviewclass(View):
             if kwargs["method"] == "ADD":
                 
                 form = studentmodelform()
-                # form = studentmodelform(initial= {'name': user_form_data['username']})
-                print("Form with data is ",form)
                 context = {"form": form}
                 return render(request= request, template_name="staff/form.html", context = context)
             
