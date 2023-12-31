@@ -47,8 +47,7 @@ class checkusertype:
                 print(request.user, "is ", 'None')
             else:
                 print("Tried to recognise")
-           
-            
+        
         response = self.get_response(request)
         return response
 

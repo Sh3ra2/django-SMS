@@ -26,6 +26,13 @@ def studentstats():
     return gender_c
 
 
+@register.simple_tag
+def querytest():
+    a = studentmodel.objects.filter('admitted_by' == 1)
+    print("a is ",a)
+    return f"Student admitted by babar are "
+    
+
 @register.filter
 def filtertagcheck(value):
     return value.upper()

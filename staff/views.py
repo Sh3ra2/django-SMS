@@ -70,6 +70,7 @@ class staffviewclass(View):
             data = paginator.page(paginator.numpages)
 
         context = {"data": data}
+        print("staff data is ",data)
         return render(request= request, template_name="staff/home.html", context = context)
     
 

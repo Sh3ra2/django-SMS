@@ -38,7 +38,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for obj in data %}
+            {% for obj in page_obj.2 %}
             <tr>
                 <th>{{obj.id}}</th> 
                 <td>{{obj.session_name}}</td>
@@ -71,7 +71,13 @@
             {% endfor %}
         </tbody>
     </table>
-
+        {# Display pagination links #}
+        {% if page_obj.1.has_previous %}
+        <a href="?page={{ page_obj.1.previous_page_number }}">Previous</a>
+        {% endif %}
+        {% if page_obj.1.has_next %}
+        <a href="?page={{ page_obj.1.next_page_number }}">Next</a>
+        {% endif %}
     {% endblock %}
 
 {% endblock %}
