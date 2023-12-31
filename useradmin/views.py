@@ -9,7 +9,9 @@ from student.forms import studentformset
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.dispatch import Signal
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.list import MultipleObjectMixin
+from .mymixin import mycutommixin
 my_signal = Signal()
 
 # Create your views here.
@@ -80,8 +82,9 @@ def logout_request(request):
     return redirect('login')
 # ========================== LOGOUT HERE ==========================
 
-class useradminclass(View):
+class useradminclass(LoginRequiredMixin ,View):
     template_name  = "useradmin/home.html"
+    login_url = "login"
     r_list = []
 
     def get(self, request, pk = None, ftype =  None, tosearch = None, downorder = None,):
@@ -148,7 +151,7 @@ class useradmindashboardclass(View):
         return render(request = request, template_name=self.template_name, context = context)
     
 
-class examclass(View):
+class examclass(MultipleObjectMixin , mycutommixin,View):
     template_name = "useradmin/examview.html"
 
     def get(self, request, pk = None):
@@ -156,19 +159,13 @@ class examclass(View):
         if pk:
             examsmodel.objects.filter(pk = pk).delete()
             return redirect("exam-view")
-        
-        query  = examsmodel.objects.all()
-        print("query is ", query)
-        context = {"data": query}
-        print("context is ", context)
-        ease = context["data"]
-        print("data is here")
-        for obj in ease:
-            print(obj)
-            print(obj.esubject)
-            print("manytomany students are", obj.studentforexam)
+        print(self.get_custom_data('time'))
+        queryset = examsmodel.objects.all()
+    
+        # -- paginate_queryset returns 4 vals, which i am accessing in html to show data and manage page numbers
+        page_obj = self.paginate_queryset(queryset, 2)
 
-        return render(request=request, template_name=self.template_name, context = context)
+        return render(request=request, template_name=self.template_name, context = {'page_obj': page_obj})
 
 
 class examnewsetclass(View):
