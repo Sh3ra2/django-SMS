@@ -1,0 +1,14 @@
+<form enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {{form.username}}
+    {{form.password}}
+    {{form.name}}
+    {{form.user_type}}
+    {{form.father_name}}
+    {{form.gender}}
+    {{form.address}}
+    {{form.im}}
+    {{form.descrip}}
+    {{form.date_joined}}
+    <button type="submit">Submit</button>
+</form>

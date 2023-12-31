@@ -23,7 +23,6 @@ class CustomUser(AbstractUser):
     father_name = models.CharField(max_length=50)
     gender = models.CharField(choices = gender_choices, max_length=50)
     address = models.CharField(max_length=50)
-
     # Add related_name to avoid clashes
     groups = models.ManyToManyField(Group, verbose_name=_('groups'), blank=True, related_name='custom_user_groups')
     user_permissions = models.ManyToManyField(

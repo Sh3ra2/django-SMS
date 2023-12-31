@@ -18,11 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from useradmin import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('useradmin/', include("useradmin.urls")),
     path('staff/', include("staff.urls")),
-    path("student/", include("student.urls"))
+    path("student/", include("student.urls")),
+    path('register', views.useradminregisterclass.as_view(), name = 'register'),
+    path('login/', views.login_request.as_view(), name = 'login'),
+    path('logout/', views.logout_request, name = 'logout')
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

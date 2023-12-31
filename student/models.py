@@ -20,7 +20,7 @@ class studentmodel(CustomUser):
     im = models.ImageField( upload_to="student")
     sclass = models.CharField(choices = class_choices, max_length=50)
     DOB = models.DateField(auto_now=False, auto_now_add=False, default = "2023-9-12")
-    admitted_by = models.ForeignKey(staffmodel, on_delete=models.SET_NULL, null = True)
+    admitted_by = models.ForeignKey(staffmodel, on_delete=models.SET_NULL, null = True, blank = True)
     date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def __str__(self) -> str:
@@ -36,7 +36,7 @@ class studentmodel(CustomUser):
 class examsmodel(models.Model):
     session_name = models.CharField(max_length=80)
     esubject = models.CharField(choices = S_Choices, max_length=50, default = "English")
-    invigilator = models.ForeignKey(staffmodel, on_delete=models.CASCADE, default = 1)
+    invigilator = models.ForeignKey(staffmodel, on_delete=models.SET_NULL, null = True, blank = True)
     selected_class = models.CharField(choices = class_choices, max_length=50, default = "2")
     studentforexam = models.ManyToManyField(studentmodel, blank = True)
 

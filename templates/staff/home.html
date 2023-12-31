@@ -1,5 +1,9 @@
 {% extends "useradmin/home.html" %}
 
+{% block titlelink %}
+href="{% url 'staff-home' %}"
+{% endblock %}
+
 {% block pagehead %}
     STUDENTS
 {% endblock %}

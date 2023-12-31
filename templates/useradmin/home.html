@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 
+{% block navs %}
+    <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'useradmin-dashboard' %}">Dashboard</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'exam-view' %}">Exam</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'staff-home' %}">Students</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'useradmin-home' %}">Staff</a>
+    </li>
+{% endblock %}
+
 {% block body %}
     <br>
     <h4>

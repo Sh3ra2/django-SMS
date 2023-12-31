@@ -4,6 +4,9 @@
 {% block body %}
 
 <h4>Students Count by Admitted Date</h4>
+
+<p>{{ 'Hello'|filtertagcheck}}</p>
+<p>{{ 1|addtwo:2 }}</p>
 <ul>
     {% staff_count_by_joindate as counts %}
     {% for entry in counts %}

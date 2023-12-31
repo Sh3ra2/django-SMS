@@ -1,0 +1,17 @@
+1. signals
+    A. DB signals
+        i. Pre_save - done
+        ii. Post_save - done
+        iii. pre_delete - done
+        iv. Post delete - done
+        vi. pre init - done
+        vii. post init - done
+        viii. m2m changed - done
+        ix. Connection created
+    B. Migration signals
+        i. pre_Migrate - done
+        ii. post_Migrate - done
+    C. request signals
+        i. requests_started
+        ii. request_finished
+        iii. got_request_exception

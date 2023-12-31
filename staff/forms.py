@@ -11,6 +11,17 @@ class staffmodelform(forms.ModelForm):
         input_formats=["%Y-%m-%d"]
     )
     password = forms.CharField(widget=forms.PasswordInput)
+
+    
     class Meta:
         model = staffmodel
         fields = "__all__"
+
+    def save(self, commit = True):
+        user = super().save(commit =False)
+        password = self.cleaned_data["password"]
+        user.set_password(password)
+        user.is_active = True
+        if commit:
+            user.save()
+        return user

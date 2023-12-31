@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+# from useradmin  import models
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -50,6 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'useradmin.middleware.requstlogmiddleware',
+    'useradmin.middleware.checkusertype',
 ]
 
 ROOT_URLCONF = 'CbvSms.urls'
@@ -133,4 +136,5 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'auth.User'
+
+AUTH_USER_MODEL = 'useradmin.CustomUser'

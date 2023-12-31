@@ -10,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 class staffmodel(CustomUser):
     im = models.ImageField(upload_to="staff")
     qualification = models.CharField(max_length=50)
-    added_by = models.ForeignKey(useradminmodel, on_delete=models.CASCADE, default= 1)
+    added_by = models.ForeignKey(useradminmodel, on_delete=models.SET_NULL, null = True, blank = True)
     join_date = models.DateField(auto_now=False, auto_now_add=False)
     till = models.DateField(auto_now=False, auto_now_add=False, null = True, blank = True)
 
