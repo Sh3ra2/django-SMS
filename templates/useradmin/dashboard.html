@@ -36,8 +36,97 @@
     {% endfor %}
 </ul>
 
-<p>{% querytest as query%}</p>
-<p>{{ query}}</p>
+<h2>Filter</h2>
+<ul>
+    {% querytest as queries  %}
+    {% for quer in queries.0 %}
+        <li>{{quer.name}}</li>
+        <li>{{quer.father_name}}</li>
+        <li>{{quer.admitted_by}}</li>
+        <br>
+    {% endfor %}
+</ul>
+<h2>Exclude</h2>
+<ul>
+    {% querytest as queries  %}
+    {% for quer in queries.1 %}
+        <li>{{quer.name}}</li>
+        <li>{{quer.father_name}}</li>
+        <li>{{quer.admitted_by}}</li>
+        <br>
+    {% endfor %}
+</ul>
+<h2>Annotate</h2>
+<ul>
+    {% querytestano as ano %}
+    {% for an in ano.0 %}
+    <li>{{an.name}} - {{an.big_class}}</li>
+    {% endfor %}
+</ul>
+<ul>
+    {% querytestano as ano %}
+    {% for an in ano.1 %}
+    <li>{{an.gender}} - {{an.count_g}}</li>
+    {% endfor %}
+</ul>
+<ul>
+    {% querytestano as ano %}
+    {% for an in ano.2 %}
+    <li>{{an.gender}} - {{an.admitted_by}} - {{an.count_m}}</li>
+    {% endfor %}
+</ul>
+<ul>
+    {% querytestano as ano %}
+    {% for an in ano.3 %}
+    <li>{{an.sclass}} - {{an.max_age}} - {{an.min_age}}</li>
+    {% endfor %}
+</ul>
+<h2>Others</h2>
+<ul>
+    {% querytesto as ano %}
+    {% for an in ano.0 %}
+    <li>{{an.name}} - {{an.sclass}} - {{an.gender}}</li>
+    {% endfor %}
+</ul>
+<ul>
+    {% querytesto as ano %}
+    {% for an in ano.1 %}
+    <li>{{an}}</li>
+    {% endfor %}
+</ul>
+
+<h2>Venn Operations</h2>
+<h3>All data is</h3>
+<ul>
+    {% queryven as ano %}
+    {{ano}}
+</ul>
+<h3>Union</h3>
+<ul>
+    {% queryven as ano %}
+    {{ano.0}}
+</ul>
+<h3>Intersect</h3>
+<ul>
+    {% queryven as ano %}
+    {{ano.1 }}
+</ul>
+<h3>Difference</h3>
+<ul>
+    {% queryven as ano %}
+    {{ano.2 }}
+</ul>
+
+<h2>Relate Operations</h2>
+{% queryrelat as ano %}
+{{ano}}
+<h3>Select</h3>
+<ul>
+    {% queryrelat as ano %}
+    {% for an in ano%}
+    <li>{{an}}</li>
+    {% endfor %}
+</ul>
 
 
 {% endblock %}
