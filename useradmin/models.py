@@ -33,21 +33,22 @@ class CustomUser(AbstractUser):
     )
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return f"{self.name}, "
     
     class Meta:
         verbose_name = _('Custom User')
         verbose_name_plural = _('Custom Users')
 
 
-class useradminmodel(CustomUser):
+class useradminmodel(models.Model):
+    user = models.ForeignKey(CustomUser, verbose_name=_(""), on_delete=models.CASCADE)
     im = models.ImageField(upload_to="useradmin")
     descrip = models.CharField(_("Description"), max_length=50)
     join_date = models.DateField(auto_now=True, auto_now_add=False)
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return f"{self.name}, {self.id}"
     
     class Meta:
-        verbose_name = _('User-admin')
-        verbose_name_plural = _('User-admins')
+        verbose_name = _('User-teacher')
+        verbose_name_plural = _('User-teachers')

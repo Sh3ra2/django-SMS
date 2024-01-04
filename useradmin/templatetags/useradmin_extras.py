@@ -83,3 +83,7 @@ def filtertagcheck(value):
 @register.filter
 def addtwo(v1,v2):
     return v1+v2
+
+@register.inclusion_tag('student\inc_tag.html')
+def shw():
+    return 

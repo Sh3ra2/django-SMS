@@ -3,7 +3,14 @@
 
 {% block body %}
 
+<h1>
+    {{request.user}}, {{request.user.user_type}}
+</h1>
+
 <h4>Students Count by Admitted Date</h4>
+
+{% shw %}
+
 
 <p>{{ 'Hello'|filtertagcheck}}</p>
 <p>{{ 1|addtwo:2 }}</p>
@@ -94,6 +101,9 @@
     <li>{{an}}</li>
     {% endfor %}
 </ul>
+
+<h3>Context Prcoessor</h3>
+{{current_year}}
 
 <h2>Venn Operations</h2>
 <h3>All data is</h3>
