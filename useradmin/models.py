@@ -40,8 +40,8 @@ class CustomUser(AbstractUser):
         verbose_name_plural = _('Custom Users')
 
 
-class useradminmodel(models.Model):
-    user = models.ForeignKey(CustomUser, verbose_name=_(""), on_delete=models.CASCADE)
+class useradminmodel(CustomUser):
+    # user = models.ForeignKey(CustomUser, verbose_name=_(""), on_delete=models.CASCADE)
     im = models.ImageField(upload_to="useradmin")
     descrip = models.CharField(_("Description"), max_length=50)
     join_date = models.DateField(auto_now=True, auto_now_add=False)

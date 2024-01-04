@@ -10,10 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='customuser',
-            name='name',
-            field=models.CharField(default=1, max_length=50),
-            preserve_default=False,
-        ),
+    
     ]

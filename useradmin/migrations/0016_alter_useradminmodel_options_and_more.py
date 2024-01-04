@@ -12,29 +12,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterModelOptions(
-            name='useradminmodel',
-            options={'verbose_name': 'User-teacher', 'verbose_name_plural': 'User-teachers'},
-        ),
-        migrations.AlterModelManagers(
-            name='useradminmodel',
-            managers=[
-            ],
-        ),
-        migrations.RemoveField(
-            model_name='useradminmodel',
-            name='customuser_ptr',
-        ),
-        migrations.AddField(
-            model_name='useradminmodel',
-            name='id',
-            field=models.BigAutoField(auto_created=True, default=1, primary_key=True, serialize=False, verbose_name='ID'),
-            preserve_default=False,
-        ),
-        migrations.AddField(
-            model_name='useradminmodel',
-            name='user',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name=''),
-            preserve_default=False,
-        ),
+        
     ]
